@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find \"c:/Users/matif/Downloads/insurance-quote-wizard \\(6\\)/insurance-quote-wizard\" -name \"*.php\")",
+      "Bash(ls \"c:/Users/matif/Downloads/insurance-quote-wizard \\(6\\)/insurance-quote-wizard/public/js/\")",
+      "Bash(ls \"c:/Users/matif/Downloads/insurance-quote-wizard \\(6\\)/insurance-quote-wizard/public/css/\")",
+      "Bash(find \"c:/Users/matif/Downloads/insurance-quote-wizard \\(6\\)/insurance-quote-wizard\" -type f -name \"*.php\" -o -name \"*.js\" -o -name \"*.css\")",
+      "Bash(grep -n \"eval\\\\|innerHTML\\\\|\\\\.html\\\\|$\\\\[\\\\|XSS\\\\|unsanitized\\\\|CSRF\\\\|nonce\" \"c:/Users/matif/Downloads/insurance-quote-wizard \\(6\\)/insurance-quote-wizard/public/js/iqw-wizard.js\")",
+      "Bash(ls \"c:/Users/matif/Downloads/insurance-quote-wizard \\(6\\)/insurance-quote-wizard/admin/js/\")",
+      "Bash(wc -l \"c:/Users/matif/Downloads/insurance-quote-wizard \\(6\\)/insurance-quote-wizard/admin/js/iqw-form-builder.js\")",
+      "Bash(head -600 \"c:/Users/matif/Downloads/insurance-quote-wizard \\(6\\)/insurance-quote-wizard/admin/js/iqw-form-builder.js\")",
+      "Bash(tail -550 \"c:/Users/matif/Downloads/insurance-quote-wizard \\(6\\)/insurance-quote-wizard/admin/js/iqw-form-builder.js\")",
+      "Bash(python3 -c \":*)",
+      "Bash(node -e \":*)",
+      "Bash(gh auth:*)",
+      "Bash(git config:*)",
+      "Bash(curl --version)",
+      "Bash(where gh:*)",
+      "Bash(\"/c/Users/matif/AppData/Local/Programs/GitHub CLI/gh.exe\" auth status)",
+      "Bash(cmd.exe /c \"where gh\")",
+      "Bash(cmd.exe /c \"gh auth status\")",
+      "Bash(powershell.exe -Command \"& ''C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe'' auth status\")",
+      "Bash(powershell.exe -Command \"& ''C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe'' repo create insurance-quote-wizard --public --description ''Insurance Quote Wizard - WordPress plugin for multi-step insurance quote forms'' 2>&1\")"
+    ]
+  }
+}

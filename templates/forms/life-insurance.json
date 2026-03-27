@@ -1,0 +1,89 @@
+{
+  "steps": [
+    {
+      "id": "step_1", "title": "Type of Coverage", "icon": "shield",
+      "fields": [
+        { "key": "policy_type", "type": "radio_cards", "label": "What type of life insurance?", "required": true,
+          "options": [
+            { "value": "term", "label": "Term Life" },
+            { "value": "whole", "label": "Whole Life" },
+            { "value": "universal", "label": "Universal Life" },
+            { "value": "not_sure", "label": "Not Sure" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "step_2", "title": "Coverage Amount", "icon": "notes",
+      "fields": [
+        { "key": "coverage_amount", "type": "select", "label": "Desired Coverage Amount", "required": true,
+          "options": [
+            { "value": "100000", "label": "$100,000" },
+            { "value": "250000", "label": "$250,000" },
+            { "value": "500000", "label": "$500,000" },
+            { "value": "1000000", "label": "$1,000,000" },
+            { "value": "custom", "label": "Custom Amount" }
+          ]
+        },
+        { "key": "term_length", "type": "select", "label": "Term Length", "required": true,
+          "options": [
+            { "value": "10", "label": "10 Years" },
+            { "value": "20", "label": "20 Years" },
+            { "value": "30", "label": "30 Years" }
+          ],
+          "conditions": { "logic": "and", "rules": [{ "field": "policy_type", "operator": "is", "value": "term" }] }
+        }
+      ]
+    },
+    {
+      "id": "step_3", "title": "About You", "icon": "user",
+      "fields": [
+        { "key": "gender", "type": "radio_cards", "label": "Gender", "required": true,
+          "options": [{ "value": "male", "label": "Male" }, { "value": "female", "label": "Female" }]
+        },
+        { "key": "dob", "type": "date", "label": "Date of Birth", "required": true, "validation": "dob_driver", "width": "half" },
+        { "key": "height_ft", "type": "select", "label": "Height (ft)", "width": "quarter",
+          "options": [{"value":"4","label":"4'"},{"value":"5","label":"5'"},{"value":"6","label":"6'"},{"value":"7","label":"7'"}]
+        },
+        { "key": "weight", "type": "number", "label": "Weight (lbs)", "placeholder": "170", "width": "quarter" },
+        { "key": "tobacco_use", "type": "radio_cards", "label": "Tobacco use in last 5 years?",
+          "options": [{ "value": "no", "label": "No" }, { "value": "yes", "label": "Yes" }]
+        }
+      ]
+    },
+    {
+      "id": "step_4", "title": "Health History", "icon": "notes",
+      "fields": [
+        { "key": "health_conditions", "type": "checkbox_group", "label": "Any of these conditions? (check all that apply)",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "diabetes", "label": "Diabetes" },
+            { "value": "heart", "label": "Heart Disease" },
+            { "value": "cancer", "label": "Cancer" },
+            { "value": "high_bp", "label": "High Blood Pressure" },
+            { "value": "other", "label": "Other" }
+          ]
+        },
+        { "key": "medications", "type": "radio_cards", "label": "Currently taking medications?",
+          "options": [{ "value": "no", "label": "No" }, { "value": "yes", "label": "Yes" }]
+        }
+      ]
+    },
+    {
+      "id": "step_5", "title": "Get Your Quote", "icon": "contact",
+      "fields": [
+        { "key": "full_name", "type": "text", "label": "Full Name", "required": true, "placeholder": "John Smith" },
+        { "key": "email", "type": "email", "label": "Email", "required": true, "width": "half" },
+        { "key": "phone", "type": "phone", "label": "Phone", "required": true, "width": "half" },
+        { "key": "zip_code", "type": "text", "label": "ZIP Code", "required": true, "validation": "zip", "width": "half" }
+      ]
+    }
+  ],
+  "settings": {
+    "motivation_text": "Get your personalized life insurance quote in 3 minutes!",
+    "success_message": "Thank you! Your life insurance quote request has been received. An agent will contact you soon.",
+    "form_mode": "wizard",
+    "review_step": true,
+    "theme": "bold"
+  }
+}

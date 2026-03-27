@@ -1,0 +1,82 @@
+{
+  "steps": [
+    {
+      "id": "step_1", "title": "Who Needs Coverage?", "icon": "user",
+      "fields": [
+        { "key": "coverage_type", "type": "radio_cards", "label": "Coverage Type", "required": true,
+          "options": [
+            { "value": "individual", "label": "Just Me" },
+            { "value": "couple", "label": "Me & Spouse" },
+            { "value": "family", "label": "My Family" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "step_2", "title": "Your Age & Location", "icon": "location",
+      "fields": [
+        { "key": "age", "type": "number", "label": "Your Age", "required": true, "placeholder": "35", "min": 18, "max": 99, "width": "half" },
+        { "key": "zip_code", "type": "text", "label": "ZIP Code", "required": true, "placeholder": "79118", "validation": "zip", "width": "half" },
+        { "key": "tobacco", "type": "radio_cards", "label": "Do you use tobacco?", "required": true,
+          "options": [{ "value": "no", "label": "No" }, { "value": "yes", "label": "Yes" }]
+        }
+      ]
+    },
+    {
+      "id": "step_3", "title": "Current Coverage", "icon": "shield",
+      "fields": [
+        { "key": "currently_insured", "type": "radio_cards", "label": "Currently have health insurance?", "required": true,
+          "options": [{ "value": "yes", "label": "Yes" }, { "value": "no", "label": "No" }]
+        },
+        { "key": "current_provider", "type": "text", "label": "Current Provider", "placeholder": "Blue Cross, Aetna, etc.",
+          "conditions": { "logic": "and", "rules": [{ "field": "currently_insured", "operator": "is", "value": "yes" }] }
+        },
+        { "key": "monthly_budget", "type": "select", "label": "Monthly Budget", "required": true,
+          "options": [
+            { "value": "under_200", "label": "Under $200" },
+            { "value": "200_400", "label": "$200 - $400" },
+            { "value": "400_600", "label": "$400 - $600" },
+            { "value": "over_600", "label": "Over $600" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "step_4", "title": "Health Details", "icon": "notes",
+      "fields": [
+        { "key": "pre_existing", "type": "radio_cards", "label": "Any pre-existing conditions?", "required": true,
+          "options": [{ "value": "no", "label": "No" }, { "value": "yes", "label": "Yes" }]
+        },
+        { "key": "conditions_detail", "type": "textarea", "label": "Please describe your conditions",
+          "placeholder": "e.g., Diabetes Type 2, managed with medication",
+          "conditions": { "logic": "and", "rules": [{ "field": "pre_existing", "operator": "is", "value": "yes" }] }
+        },
+        { "key": "prescription_meds", "type": "radio_cards", "label": "Take prescription medications?",
+          "options": [{ "value": "no", "label": "No" }, { "value": "yes", "label": "Yes" }]
+        }
+      ]
+    },
+    {
+      "id": "step_5", "title": "Your Contact Info", "icon": "contact",
+      "fields": [
+        { "key": "full_name", "type": "text", "label": "Full Name", "required": true, "placeholder": "Jane Smith" },
+        { "key": "email", "type": "email", "label": "Email", "required": true, "placeholder": "jane@email.com", "width": "half" },
+        { "key": "phone", "type": "phone", "label": "Phone", "required": true, "placeholder": "(555) 123-4567", "width": "half" },
+        { "key": "best_time", "type": "select", "label": "Best Time to Call",
+          "options": [
+            { "value": "morning", "label": "Morning (9am-12pm)" },
+            { "value": "afternoon", "label": "Afternoon (12pm-5pm)" },
+            { "value": "evening", "label": "Evening (5pm-8pm)" }
+          ]
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "motivation_text": "Find affordable health coverage in 2 minutes!",
+    "success_message": "Thank you! A health insurance specialist will contact you within 24 hours.",
+    "form_mode": "wizard",
+    "review_step": true,
+    "theme": "clean-pro"
+  }
+}

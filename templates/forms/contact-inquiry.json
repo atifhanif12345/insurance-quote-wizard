@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "id": "step_1", "title": "Contact Information",
+      "fields": [
+        { "key": "full_name", "type": "text", "label": "Full Name", "required": true, "placeholder": "John Smith", "width": "half" },
+        { "key": "email", "type": "email", "label": "Email Address", "required": true, "placeholder": "john@email.com", "width": "half" },
+        { "key": "phone", "type": "phone", "label": "Phone Number", "placeholder": "(555) 123-4567", "width": "half" },
+        { "key": "insurance_type", "type": "select", "label": "I'm Interested In", "width": "half",
+          "options": [
+            { "value": "auto", "label": "Auto Insurance" },
+            { "value": "home", "label": "Home Insurance" },
+            { "value": "life", "label": "Life Insurance" },
+            { "value": "health", "label": "Health Insurance" },
+            { "value": "business", "label": "Business Insurance" },
+            { "value": "other", "label": "Other / General Question" }
+          ]
+        },
+        { "key": "message", "type": "textarea", "label": "Message", "placeholder": "Tell us how we can help you..." },
+        { "key": "consent", "type": "consent", "label": "I agree to be contacted about my insurance inquiry", "required": true }
+      ]
+    }
+  ],
+  "settings": {
+    "motivation_text": "",
+    "success_message": "Thank you for reaching out! We'll get back to you within 1 business day.",
+    "form_mode": "single",
+    "review_step": false,
+    "theme": "clean-pro"
+  }
+}

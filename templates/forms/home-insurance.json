@@ -1,0 +1,756 @@
+{
+  "settings": {
+    "redirect_url": "",
+    "success_message": "Thank you! Your home insurance quote request has been submitted.",
+    "motivation_text": "Protect your home in just 3 minutes!"
+  },
+  "steps": [
+    {
+      "id": "property_type",
+      "title": "What type of property?",
+      "icon": "home",
+      "fields": [
+        {
+          "key": "property_type",
+          "type": "radio_cards",
+          "label": "Property Type",
+          "required": true,
+          "options": [
+            {
+              "value": "single_family",
+              "label": "Single Family"
+            },
+            {
+              "value": "condo",
+              "label": "Condo"
+            },
+            {
+              "value": "townhouse",
+              "label": "Townhouse"
+            },
+            {
+              "value": "mobile_home",
+              "label": "Mobile Home"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "address",
+      "title": "Property Address",
+      "icon": "location",
+      "fields": [
+        {
+          "key": "street_address",
+          "type": "text",
+          "label": "Street Address",
+          "placeholder": "3068 Valletta St",
+          "required": true
+        },
+        {
+          "key": "city",
+          "type": "text",
+          "label": "City",
+          "placeholder": "Brownsville",
+          "required": true
+        },
+        {
+          "key": "state",
+          "type": "select",
+          "label": "State",
+          "required": true,
+          "options": [
+            {
+              "value": "AL",
+              "label": "Alabama"
+            },
+            {
+              "value": "AK",
+              "label": "Alaska"
+            },
+            {
+              "value": "AZ",
+              "label": "Arizona"
+            },
+            {
+              "value": "AR",
+              "label": "Arkansas"
+            },
+            {
+              "value": "CA",
+              "label": "California"
+            },
+            {
+              "value": "CO",
+              "label": "Colorado"
+            },
+            {
+              "value": "CT",
+              "label": "Connecticut"
+            },
+            {
+              "value": "DE",
+              "label": "Delaware"
+            },
+            {
+              "value": "FL",
+              "label": "Florida"
+            },
+            {
+              "value": "GA",
+              "label": "Georgia"
+            },
+            {
+              "value": "HI",
+              "label": "Hawaii"
+            },
+            {
+              "value": "ID",
+              "label": "Idaho"
+            },
+            {
+              "value": "IL",
+              "label": "Illinois"
+            },
+            {
+              "value": "IN",
+              "label": "Indiana"
+            },
+            {
+              "value": "IA",
+              "label": "Iowa"
+            },
+            {
+              "value": "KS",
+              "label": "Kansas"
+            },
+            {
+              "value": "KY",
+              "label": "Kentucky"
+            },
+            {
+              "value": "LA",
+              "label": "Louisiana"
+            },
+            {
+              "value": "ME",
+              "label": "Maine"
+            },
+            {
+              "value": "MD",
+              "label": "Maryland"
+            },
+            {
+              "value": "MA",
+              "label": "Massachusetts"
+            },
+            {
+              "value": "MI",
+              "label": "Michigan"
+            },
+            {
+              "value": "MN",
+              "label": "Minnesota"
+            },
+            {
+              "value": "MS",
+              "label": "Mississippi"
+            },
+            {
+              "value": "MO",
+              "label": "Missouri"
+            },
+            {
+              "value": "MT",
+              "label": "Montana"
+            },
+            {
+              "value": "NE",
+              "label": "Nebraska"
+            },
+            {
+              "value": "NV",
+              "label": "Nevada"
+            },
+            {
+              "value": "NH",
+              "label": "New Hampshire"
+            },
+            {
+              "value": "NJ",
+              "label": "New Jersey"
+            },
+            {
+              "value": "NM",
+              "label": "New Mexico"
+            },
+            {
+              "value": "NY",
+              "label": "New York"
+            },
+            {
+              "value": "NC",
+              "label": "North Carolina"
+            },
+            {
+              "value": "ND",
+              "label": "North Dakota"
+            },
+            {
+              "value": "OH",
+              "label": "Ohio"
+            },
+            {
+              "value": "OK",
+              "label": "Oklahoma"
+            },
+            {
+              "value": "OR",
+              "label": "Oregon"
+            },
+            {
+              "value": "PA",
+              "label": "Pennsylvania"
+            },
+            {
+              "value": "RI",
+              "label": "Rhode Island"
+            },
+            {
+              "value": "SC",
+              "label": "South Carolina"
+            },
+            {
+              "value": "SD",
+              "label": "South Dakota"
+            },
+            {
+              "value": "TN",
+              "label": "Tennessee"
+            },
+            {
+              "value": "TX",
+              "label": "Texas"
+            },
+            {
+              "value": "UT",
+              "label": "Utah"
+            },
+            {
+              "value": "VT",
+              "label": "Vermont"
+            },
+            {
+              "value": "VA",
+              "label": "Virginia"
+            },
+            {
+              "value": "WA",
+              "label": "Washington"
+            },
+            {
+              "value": "WV",
+              "label": "West Virginia"
+            },
+            {
+              "value": "WI",
+              "label": "Wisconsin"
+            },
+            {
+              "value": "WY",
+              "label": "Wyoming"
+            },
+            {
+              "value": "DC",
+              "label": "District of Columbia"
+            }
+          ]
+        },
+        {
+          "key": "zip_code",
+          "type": "text",
+          "label": "ZIP Code",
+          "placeholder": "78520",
+          "required": true,
+          "validation": "zip"
+        }
+      ]
+    },
+    {
+      "id": "property_details",
+      "title": "Property Details",
+      "icon": "home",
+      "fields": [
+        {
+          "key": "year_built",
+          "type": "number",
+          "label": "Year Built",
+          "placeholder": "2005",
+          "required": true,
+          "min": 1900,
+          "max": 2026
+        },
+        {
+          "key": "square_footage",
+          "type": "number",
+          "label": "Square Footage",
+          "placeholder": "976",
+          "required": true
+        },
+        {
+          "key": "stories",
+          "type": "select",
+          "label": "Number of Stories",
+          "required": true,
+          "options": [
+            {
+              "value": "one_story",
+              "label": "One Story"
+            },
+            {
+              "value": "two_story",
+              "label": "Two Story"
+            },
+            {
+              "value": "three_plus",
+              "label": "Three or More"
+            },
+            {
+              "value": "split_level",
+              "label": "Split Level"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "construction",
+      "title": "Construction Details",
+      "icon": "home",
+      "fields": [
+        {
+          "key": "exterior_walls",
+          "type": "select",
+          "label": "Exterior Walls",
+          "required": true,
+          "options": [
+            {
+              "value": "wood_frame",
+              "label": "Mostly Wood Frame"
+            },
+            {
+              "value": "brick",
+              "label": "Brick"
+            },
+            {
+              "value": "stucco",
+              "label": "Stucco"
+            },
+            {
+              "value": "vinyl_siding",
+              "label": "Vinyl Siding"
+            },
+            {
+              "value": "stone",
+              "label": "Stone"
+            },
+            {
+              "value": "concrete",
+              "label": "Concrete Block"
+            }
+          ]
+        },
+        {
+          "key": "roof_type",
+          "type": "select",
+          "label": "Roof Type",
+          "required": true,
+          "options": [
+            {
+              "value": "composition_shingle",
+              "label": "Composition Shingle"
+            },
+            {
+              "value": "metal",
+              "label": "Metal"
+            },
+            {
+              "value": "tile",
+              "label": "Tile"
+            },
+            {
+              "value": "slate",
+              "label": "Slate"
+            },
+            {
+              "value": "wood_shake",
+              "label": "Wood Shake"
+            },
+            {
+              "value": "flat_rubber",
+              "label": "Flat/Rubber"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rooms",
+      "title": "Rooms",
+      "icon": "home",
+      "fields": [
+        {
+          "key": "bedrooms",
+          "type": "select",
+          "label": "Bedrooms",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "3",
+              "label": "3"
+            },
+            {
+              "value": "4",
+              "label": "4"
+            },
+            {
+              "value": "5",
+              "label": "5+"
+            }
+          ]
+        },
+        {
+          "key": "bathrooms",
+          "type": "select",
+          "label": "Bathrooms",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "1 Bath"
+            },
+            {
+              "value": "1.5",
+              "label": "1.5 Bath"
+            },
+            {
+              "value": "2",
+              "label": "2 Bath"
+            },
+            {
+              "value": "2.5",
+              "label": "2.5 Bath"
+            },
+            {
+              "value": "3",
+              "label": "3 Bath"
+            },
+            {
+              "value": "3.5",
+              "label": "3.5+ Bath"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "garage_basement",
+      "title": "Garage & Basement",
+      "icon": "home",
+      "fields": [
+        {
+          "key": "garage_type",
+          "type": "select",
+          "label": "Garage Type",
+          "required": true,
+          "options": [
+            {
+              "value": "no_garage",
+              "label": "No Garage"
+            },
+            {
+              "value": "attached",
+              "label": "Attached"
+            },
+            {
+              "value": "detached",
+              "label": "Detached"
+            },
+            {
+              "value": "carport",
+              "label": "Carport"
+            }
+          ]
+        },
+        {
+          "key": "basement_type",
+          "type": "select",
+          "label": "Basement",
+          "required": true,
+          "options": [
+            {
+              "value": "none",
+              "label": "No Basement"
+            },
+            {
+              "value": "partial",
+              "label": "Partial"
+            },
+            {
+              "value": "full_unfinished",
+              "label": "Full Unfinished"
+            },
+            {
+              "value": "full_finished",
+              "label": "Full Finished"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "title": "Security Features",
+      "icon": "shield",
+      "fields": [
+        {
+          "key": "security_features",
+          "type": "checkbox_group",
+          "label": "Select all that apply",
+          "required": false,
+          "options": [
+            {
+              "value": "deadbolt_locks",
+              "label": "Deadbolt Locks"
+            },
+            {
+              "value": "smoke_alarm",
+              "label": "Smoke Alarm"
+            },
+            {
+              "value": "fire_extinguisher",
+              "label": "Fire Extinguisher"
+            },
+            {
+              "value": "burglar_alarm",
+              "label": "Burglar Alarm"
+            },
+            {
+              "value": "sprinkler_system",
+              "label": "Sprinkler System"
+            },
+            {
+              "value": "near_firestation",
+              "label": "Near Fire Station"
+            },
+            {
+              "value": "near_hydrant",
+              "label": "Near Fire Hydrant"
+            },
+            {
+              "value": "gated_community",
+              "label": "Gated Community"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "currently_insured",
+      "title": "Currently Insured?",
+      "icon": "shield",
+      "fields": [
+        {
+          "key": "currently_insured",
+          "type": "radio_cards",
+          "label": "Do you currently have home insurance?",
+          "required": true,
+          "options": [
+            {
+              "value": "yes",
+              "label": "Yes"
+            },
+            {
+              "value": "no",
+              "label": "No"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "current_coverage",
+      "title": "Current Coverage",
+      "icon": "shield",
+      "conditions": {
+        "logic": "and",
+        "rules": [
+          {
+            "field": "currently_insured",
+            "operator": "is",
+            "value": "yes"
+          }
+        ]
+      },
+      "fields": [
+        {
+          "key": "current_carrier",
+          "type": "select",
+          "label": "Current Insurance Carrier",
+          "required": true,
+          "options": [
+            {
+              "value": "State Farm",
+              "label": "State Farm"
+            },
+            {
+              "value": "Allstate",
+              "label": "Allstate"
+            },
+            {
+              "value": "Progressive",
+              "label": "Progressive"
+            },
+            {
+              "value": "USAA",
+              "label": "USAA"
+            },
+            {
+              "value": "Liberty Mutual",
+              "label": "Liberty Mutual"
+            },
+            {
+              "value": "Farmers",
+              "label": "Farmers"
+            },
+            {
+              "value": "Nationwide",
+              "label": "Nationwide"
+            },
+            {
+              "value": "other",
+              "label": "Other"
+            }
+          ]
+        },
+        {
+          "key": "dwelling_coverage",
+          "type": "currency",
+          "label": "Dwelling Coverage (Resident Limit)",
+          "placeholder": "178738",
+          "required": true
+        },
+        {
+          "key": "personal_liability",
+          "type": "currency",
+          "label": "Personal Liability",
+          "placeholder": "100000",
+          "required": true
+        },
+        {
+          "key": "deductible",
+          "type": "select",
+          "label": "Deductible",
+          "required": true,
+          "options": [
+            {
+              "value": "250",
+              "label": "$250"
+            },
+            {
+              "value": "500",
+              "label": "$500"
+            },
+            {
+              "value": "1000",
+              "label": "$1,000"
+            },
+            {
+              "value": "2000",
+              "label": "$2,000"
+            },
+            {
+              "value": "2500",
+              "label": "$2,500"
+            },
+            {
+              "value": "5000",
+              "label": "$5,000"
+            }
+          ]
+        },
+        {
+          "key": "months_insured",
+          "type": "number",
+          "label": "Months Continually Insured",
+          "placeholder": "36",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "personal_info",
+      "title": "Your Information",
+      "icon": "user",
+      "fields": [
+        {
+          "key": "full_name",
+          "type": "text",
+          "label": "Full Name",
+          "placeholder": "Roberto Pecina",
+          "required": true
+        },
+        {
+          "key": "date_of_birth",
+          "type": "date",
+          "label": "Date of Birth",
+          "required": true
+        },
+        {
+          "key": "gender",
+          "type": "radio_cards",
+          "label": "Gender",
+          "required": true,
+          "options": [
+            {
+              "value": "female",
+              "label": "Female"
+            },
+            {
+              "value": "male",
+              "label": "Male"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "contact",
+      "title": "Contact Details",
+      "icon": "contact",
+      "fields": [
+        {
+          "key": "email",
+          "type": "email",
+          "label": "Email Address",
+          "required": true
+        },
+        {
+          "key": "phone",
+          "type": "phone",
+          "label": "Phone Number",
+          "required": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "steps": [
+    {
+      "id": "step_1", "title": "Business Type", "icon": "license",
+      "fields": [
+        { "key": "business_type", "type": "select", "label": "Type of Business", "required": true,
+          "options": [
+            { "value": "sole_prop", "label": "Sole Proprietorship" },
+            { "value": "llc", "label": "LLC" },
+            { "value": "corp", "label": "Corporation" },
+            { "value": "partnership", "label": "Partnership" },
+            { "value": "nonprofit", "label": "Non-Profit" }
+          ]
+        },
+        { "key": "industry", "type": "select", "label": "Industry", "required": true,
+          "options": [
+            { "value": "retail", "label": "Retail" },
+            { "value": "restaurant", "label": "Restaurant / Food" },
+            { "value": "construction", "label": "Construction" },
+            { "value": "tech", "label": "Technology" },
+            { "value": "healthcare", "label": "Healthcare" },
+            { "value": "real_estate", "label": "Real Estate" },
+            { "value": "professional", "label": "Professional Services" },
+            { "value": "other", "label": "Other" }
+          ]
+        },
+        { "key": "employees", "type": "select", "label": "Number of Employees", "required": true,
+          "options": [
+            { "value": "1", "label": "Just Me" },
+            { "value": "2_5", "label": "2-5" },
+            { "value": "6_25", "label": "6-25" },
+            { "value": "26_100", "label": "26-100" },
+            { "value": "100plus", "label": "100+" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "step_2", "title": "Coverage Needed", "icon": "shield",
+      "fields": [
+        { "key": "coverage_types", "type": "checkbox_group", "label": "What coverage do you need?", "required": true,
+          "options": [
+            { "value": "general_liability", "label": "General Liability" },
+            { "value": "property", "label": "Commercial Property" },
+            { "value": "workers_comp", "label": "Workers' Compensation" },
+            { "value": "professional_liability", "label": "Professional Liability (E&O)" },
+            { "value": "commercial_auto", "label": "Commercial Auto" },
+            { "value": "bop", "label": "Business Owner's Policy (BOP)" },
+            { "value": "cyber", "label": "Cyber Liability" },
+            { "value": "not_sure", "label": "Not Sure — Need Advice" }
+          ]
+        },
+        { "key": "annual_revenue", "type": "select", "label": "Annual Revenue",
+          "options": [
+            { "value": "under_100k", "label": "Under $100,000" },
+            { "value": "100k_500k", "label": "$100,000 - $500,000" },
+            { "value": "500k_1m", "label": "$500,000 - $1M" },
+            { "value": "over_1m", "label": "Over $1,000,000" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "step_3", "title": "Business Details", "icon": "home",
+      "fields": [
+        { "key": "business_name", "type": "text", "label": "Business Name", "required": true, "placeholder": "ABC Company LLC" },
+        { "key": "business_address", "type": "address", "label": "Business Address", "required": true },
+        { "key": "years_in_business", "type": "select", "label": "Years in Business",
+          "options": [
+            { "value": "new", "label": "Starting New" },
+            { "value": "1_3", "label": "1-3 Years" },
+            { "value": "4_10", "label": "4-10 Years" },
+            { "value": "10plus", "label": "10+ Years" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "step_4", "title": "Contact Information", "icon": "contact",
+      "fields": [
+        { "key": "full_name", "type": "text", "label": "Your Name", "required": true },
+        { "key": "title", "type": "text", "label": "Title / Role", "placeholder": "Owner, Manager, etc.", "width": "half" },
+        { "key": "email", "type": "email", "label": "Email", "required": true, "width": "half" },
+        { "key": "phone", "type": "phone", "label": "Phone", "required": true, "width": "half" },
+        { "key": "preferred_contact", "type": "select", "label": "Preferred Contact Method", "width": "half",
+          "options": [
+            { "value": "phone", "label": "Phone Call" },
+            { "value": "email", "label": "Email" },
+            { "value": "either", "label": "Either" }
+          ]
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "motivation_text": "Protect your business — get quotes from top carriers!",
+    "success_message": "Thank you! A commercial insurance specialist will prepare your customized quote within 24 hours.",
+    "form_mode": "wizard",
+    "review_step": true,
+    "theme": "bold"
+  }
+}

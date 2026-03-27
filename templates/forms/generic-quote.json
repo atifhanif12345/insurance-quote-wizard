@@ -1,0 +1,425 @@
+{
+  "settings": {
+    "redirect_url": "",
+    "success_message": "Thank you! Your quote request has been submitted.",
+    "motivation_text": "Get a quote in under 2 minutes!"
+  },
+  "steps": [
+    {
+      "id": "insurance_type",
+      "title": "What type of insurance?",
+      "icon": "shield",
+      "fields": [
+        {
+          "key": "insurance_type",
+          "type": "radio_cards",
+          "label": "Select Insurance Type",
+          "required": true,
+          "options": [
+            {
+              "value": "motorcycle",
+              "label": "Motorcycle"
+            },
+            {
+              "value": "life",
+              "label": "Life Insurance"
+            },
+            {
+              "value": "boat",
+              "label": "Boat"
+            },
+            {
+              "value": "atv",
+              "label": "ATV"
+            },
+            {
+              "value": "condo",
+              "label": "Condo"
+            },
+            {
+              "value": "renters",
+              "label": "Renters"
+            },
+            {
+              "value": "business",
+              "label": "Business"
+            },
+            {
+              "value": "other",
+              "label": "Other"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "personal_info",
+      "title": "Your Information",
+      "icon": "user",
+      "fields": [
+        {
+          "key": "full_name",
+          "type": "text",
+          "label": "Full Name",
+          "required": true
+        },
+        {
+          "key": "date_of_birth",
+          "type": "date",
+          "label": "Date of Birth",
+          "required": true
+        },
+        {
+          "key": "gender",
+          "type": "radio_cards",
+          "label": "Gender",
+          "required": true,
+          "options": [
+            {
+              "value": "female",
+              "label": "Female"
+            },
+            {
+              "value": "male",
+              "label": "Male"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "contact",
+      "title": "Contact Details",
+      "icon": "contact",
+      "fields": [
+        {
+          "key": "email",
+          "type": "email",
+          "label": "Email Address",
+          "required": true
+        },
+        {
+          "key": "phone",
+          "type": "phone",
+          "label": "Phone Number",
+          "required": true
+        },
+        {
+          "key": "street_address",
+          "type": "text",
+          "label": "Street Address",
+          "required": true
+        },
+        {
+          "key": "city",
+          "type": "text",
+          "label": "City",
+          "required": true
+        },
+        {
+          "key": "state",
+          "type": "select",
+          "label": "State",
+          "required": true,
+          "options": [
+            {
+              "value": "AL",
+              "label": "Alabama"
+            },
+            {
+              "value": "AK",
+              "label": "Alaska"
+            },
+            {
+              "value": "AZ",
+              "label": "Arizona"
+            },
+            {
+              "value": "AR",
+              "label": "Arkansas"
+            },
+            {
+              "value": "CA",
+              "label": "California"
+            },
+            {
+              "value": "CO",
+              "label": "Colorado"
+            },
+            {
+              "value": "CT",
+              "label": "Connecticut"
+            },
+            {
+              "value": "DE",
+              "label": "Delaware"
+            },
+            {
+              "value": "FL",
+              "label": "Florida"
+            },
+            {
+              "value": "GA",
+              "label": "Georgia"
+            },
+            {
+              "value": "HI",
+              "label": "Hawaii"
+            },
+            {
+              "value": "ID",
+              "label": "Idaho"
+            },
+            {
+              "value": "IL",
+              "label": "Illinois"
+            },
+            {
+              "value": "IN",
+              "label": "Indiana"
+            },
+            {
+              "value": "IA",
+              "label": "Iowa"
+            },
+            {
+              "value": "KS",
+              "label": "Kansas"
+            },
+            {
+              "value": "KY",
+              "label": "Kentucky"
+            },
+            {
+              "value": "LA",
+              "label": "Louisiana"
+            },
+            {
+              "value": "ME",
+              "label": "Maine"
+            },
+            {
+              "value": "MD",
+              "label": "Maryland"
+            },
+            {
+              "value": "MA",
+              "label": "Massachusetts"
+            },
+            {
+              "value": "MI",
+              "label": "Michigan"
+            },
+            {
+              "value": "MN",
+              "label": "Minnesota"
+            },
+            {
+              "value": "MS",
+              "label": "Mississippi"
+            },
+            {
+              "value": "MO",
+              "label": "Missouri"
+            },
+            {
+              "value": "MT",
+              "label": "Montana"
+            },
+            {
+              "value": "NE",
+              "label": "Nebraska"
+            },
+            {
+              "value": "NV",
+              "label": "Nevada"
+            },
+            {
+              "value": "NH",
+              "label": "New Hampshire"
+            },
+            {
+              "value": "NJ",
+              "label": "New Jersey"
+            },
+            {
+              "value": "NM",
+              "label": "New Mexico"
+            },
+            {
+              "value": "NY",
+              "label": "New York"
+            },
+            {
+              "value": "NC",
+              "label": "North Carolina"
+            },
+            {
+              "value": "ND",
+              "label": "North Dakota"
+            },
+            {
+              "value": "OH",
+              "label": "Ohio"
+            },
+            {
+              "value": "OK",
+              "label": "Oklahoma"
+            },
+            {
+              "value": "OR",
+              "label": "Oregon"
+            },
+            {
+              "value": "PA",
+              "label": "Pennsylvania"
+            },
+            {
+              "value": "RI",
+              "label": "Rhode Island"
+            },
+            {
+              "value": "SC",
+              "label": "South Carolina"
+            },
+            {
+              "value": "SD",
+              "label": "South Dakota"
+            },
+            {
+              "value": "TN",
+              "label": "Tennessee"
+            },
+            {
+              "value": "TX",
+              "label": "Texas"
+            },
+            {
+              "value": "UT",
+              "label": "Utah"
+            },
+            {
+              "value": "VT",
+              "label": "Vermont"
+            },
+            {
+              "value": "VA",
+              "label": "Virginia"
+            },
+            {
+              "value": "WA",
+              "label": "Washington"
+            },
+            {
+              "value": "WV",
+              "label": "West Virginia"
+            },
+            {
+              "value": "WI",
+              "label": "Wisconsin"
+            },
+            {
+              "value": "WY",
+              "label": "Wyoming"
+            },
+            {
+              "value": "DC",
+              "label": "District of Columbia"
+            }
+          ]
+        },
+        {
+          "key": "zip_code",
+          "type": "text",
+          "label": "ZIP Code",
+          "required": true,
+          "validation": "zip"
+        }
+      ]
+    },
+    {
+      "id": "current_insurance",
+      "title": "Currently Insured?",
+      "icon": "shield",
+      "fields": [
+        {
+          "key": "currently_insured",
+          "type": "radio_cards",
+          "label": "Do you currently have this type of insurance?",
+          "required": true,
+          "options": [
+            {
+              "value": "yes",
+              "label": "Yes"
+            },
+            {
+              "value": "no",
+              "label": "No"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "current_details",
+      "title": "Current Insurance",
+      "icon": "shield",
+      "conditions": {
+        "logic": "and",
+        "rules": [
+          {
+            "field": "currently_insured",
+            "operator": "is",
+            "value": "yes"
+          }
+        ]
+      },
+      "fields": [
+        {
+          "key": "current_carrier",
+          "type": "text",
+          "label": "Current Carrier",
+          "required": true
+        },
+        {
+          "key": "years_with_carrier",
+          "type": "select",
+          "label": "Years with Current Carrier",
+          "required": true,
+          "options": [
+            {
+              "value": "0",
+              "label": "Less than 1"
+            },
+            {
+              "value": "1",
+              "label": "1-2 years"
+            },
+            {
+              "value": "3",
+              "label": "3-5 years"
+            },
+            {
+              "value": "5",
+              "label": "5+ years"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "additional",
+      "title": "Additional Details",
+      "icon": "notes",
+      "fields": [
+        {
+          "key": "additional_details",
+          "type": "textarea",
+          "label": "Tell us more about what you need",
+          "placeholder": "Any specific coverage needs, questions, or details about what you want to insure...",
+          "required": false
+        }
+      ]
+    }
+  ]
+}
