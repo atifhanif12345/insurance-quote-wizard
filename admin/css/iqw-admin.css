@@ -173,6 +173,11 @@
 .iqw-step-icon-select { width:80px; font-size:12px; padding:3px 6px; border:1px solid #ddd; border-radius:3px; }
 .iqw-step-del { border:none; background:none; color:#ccc; font-size:18px; cursor:pointer; padding:0 4px; }
 .iqw-step-del:hover { color:#e53935; }
+.iqw-step-dup { border:none; background:none; color:#aaa; font-size:15px; cursor:pointer; padding:0 4px; }
+.iqw-step-dup:hover { color:#1976d2; }
+.iqw-step-move-up,.iqw-step-move-dn { border:none; background:#eee; color:#555; font-size:11px; cursor:pointer; padding:1px 5px; border-radius:3px; line-height:1.4; }
+.iqw-step-move-up:hover,.iqw-step-move-dn:hover { background:#4CAF50; color:#fff; }
+.iqw-step-move-up:disabled,.iqw-step-move-dn:disabled { opacity:0.3; cursor:not-allowed; }
 .iqw-step-cond-btn { border:none; background:none; color:#ccc; font-size:14px; cursor:pointer; padding:2px 6px; border-radius:3px; }
 .iqw-step-cond-btn:hover { background:#fff3e0; color:#e65100; }
 .iqw-step-condition-badge { font-size:11px; background:#fff3e0; color:#e65100; padding:1px 6px; border-radius:8px; font-weight:600; }

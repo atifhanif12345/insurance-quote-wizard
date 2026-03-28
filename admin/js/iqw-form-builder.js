@@ -395,6 +395,8 @@
             }
 
             $header.append('<button class="iqw-step-cond-btn" data-step="'+si+'" title="Step Conditions">⚡</button>');
+            $header.append('<button class="iqw-step-move-up" data-step="'+si+'" title="Move step up" '+(si===0?'disabled':'')+'>▲</button>');
+            $header.append('<button class="iqw-step-move-dn" data-step="'+si+'" title="Move step down" '+(si===config.steps.length-1?'disabled':'')+'>▼</button>');
             $header.append('<button class="iqw-step-dup" data-step="'+si+'" title="Duplicate Step">⧉</button>');
             $header.append('<button class="iqw-step-del" data-step="'+si+'" title="Delete Step">&times;</button>');
             $step.append($header);
@@ -469,6 +471,26 @@
                 f.key = f.type + '_' + Date.now().toString(36) + '_' + (++_dupCounter);
             });
             config.steps.splice(si + 1, 0, clone);
+            renderSteps();
+        });
+
+        // Move step up
+        $(document).off('click','.iqw-step-move-up').on('click','.iqw-step-move-up', function(){
+            var si = $(this).data('step');
+            if(si <= 0) return;
+            var tmp = config.steps[si-1];
+            config.steps[si-1] = config.steps[si];
+            config.steps[si] = tmp;
+            renderSteps();
+        });
+
+        // Move step down
+        $(document).off('click','.iqw-step-move-dn').on('click','.iqw-step-move-dn', function(){
+            var si = $(this).data('step');
+            if(si >= config.steps.length - 1) return;
+            var tmp = config.steps[si+1];
+            config.steps[si+1] = config.steps[si];
+            config.steps[si] = tmp;
             renderSteps();
         });
 
@@ -632,6 +654,7 @@
         // Field reorder within steps
         $('.iqw-field-card').each(function(){
             this.addEventListener('dragstart', function(e){
+                e.stopPropagation(); // prevent step-level drag from also firing
                 dragData = { type:'move_field', step:parseInt(this.dataset.step), field:parseInt(this.dataset.field) };
                 e.dataTransfer.effectAllowed='move';
                 this.classList.add('dragging');
@@ -740,6 +763,7 @@
 
         // Label
         $body.append(settingRow('Label', '<input type="text" class="iqw-setting-input" data-prop="label" value="'+esc(field.label||'')+'">'));
+        $body.append(settingRow('', '<label><input type="checkbox" class="iqw-setting-check" data-prop="hide_label" '+(field.hide_label?'checked':'')+'>Hide label on frontend</label>'));
 
         // Placeholder
         if(['text','email','phone','number','currency','textarea','date'].indexOf(field.type) > -1){

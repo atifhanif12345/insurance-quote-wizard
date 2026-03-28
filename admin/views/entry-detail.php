@@ -30,10 +30,16 @@
             if ( $config && ! empty( $config['steps'] ) ) :
                 foreach ( $config['steps'] as $si => $step ) :
                     if ( empty( $step['fields'] ) ) continue;
+
+                    // $has_data check — must handle repeater fields (their data is stored as flat sub-keys)
                     $has_data = false;
                     foreach ( $step['fields'] as $field ) {
                         $key = $field['key'] ?? '';
                         if ( ! empty( $data[ $key ] ) ) { $has_data = true; break; }
+                        if ( ( $field['type'] ?? '' ) === 'repeater' && ! empty( $field['sub_fields'] ) ) {
+                            $sub_key = $key . '_0_' . ( $field['sub_fields'][0]['key'] ?? '' );
+                            if ( isset( $data[ $sub_key ] ) && $data[ $sub_key ] !== '' ) { $has_data = true; break; }
+                        }
                     }
                     if ( ! $has_data ) continue;
             ?>
@@ -45,7 +51,47 @@
                     <?php
                     $alt = false;
                     foreach ( $step['fields'] as $field ) :
-                        $key = $field['key'] ?? '';
+                        $key   = $field['key'] ?? '';
+                        $ftype = $field['type'] ?? 'text';
+
+                        // ── REPEATER: render each item as a grouped sub-table ──
+                        if ( $ftype === 'repeater' && ! empty( $field['sub_fields'] ) ) :
+                            // Count how many items exist in saved data
+                            $item_count = 0;
+                            while ( isset( $data[ $key . '_' . $item_count . '_' . ( $field['sub_fields'][0]['key'] ?? '_x' ) ] ) ) {
+                                $item_count++;
+                            }
+                            if ( $item_count === 0 ) continue;
+                            $alt = ! $alt;
+                    ?>
+                    <tr <?php echo $alt ? 'style="background:#fafafa;"' : ''; ?>>
+                        <th style="width:200px;font-weight:600;font-size:13px;color:#555;vertical-align:top;padding-top:10px;">
+                            <?php echo esc_html( $field['label'] ?? ucwords( str_replace( '_', ' ', $key ) ) ); ?>
+                        </th>
+                        <td style="font-size:13px;padding:8px;">
+                            <?php for ( $ri = 0; $ri < $item_count; $ri++ ) : ?>
+                            <div style="margin-bottom:8px;padding:8px;background:#f5f5f5;border-radius:4px;border-left:3px solid #4CAF50;">
+                                <strong style="font-size:12px;color:#4CAF50;">#<?php echo $ri + 1; ?></strong>
+                                <table style="width:100%;margin-top:4px;border-collapse:collapse;">
+                                <?php foreach ( $field['sub_fields'] as $sf ) :
+                                    $sub_key = $key . '_' . $ri . '_' . $sf['key'];
+                                    $sub_val = $data[ $sub_key ] ?? '';
+                                    if ( $sub_val === '' ) continue;
+                                ?>
+                                <tr>
+                                    <td style="width:35%;font-size:12px;color:#666;padding:2px 6px 2px 0;"><?php echo esc_html( $sf['label'] ?? $sf['key'] ); ?>:</td>
+                                    <td style="font-size:12px;font-weight:500;"><?php echo esc_html( $sub_val ); ?></td>
+                                </tr>
+                                <?php endforeach; ?>
+                                </table>
+                            </div>
+                            <?php endfor; ?>
+                        </td>
+                    </tr>
+                    <?php continue; endif; // end repeater ?>
+
+                        <?php
+                        // ── REGULAR FIELDS ──
                         $value = $data[ $key ] ?? '';
                         if ( empty( $value ) && $value !== '0' ) continue;
                         if ( is_array( $value ) ) $value = implode( ', ', $value );
@@ -61,7 +107,7 @@
                                 }
                             }
                         }
-                    ?>
+                        ?>
                     <tr <?php echo $alt ? 'style="background:#fafafa;"' : ''; ?>>
                         <th style="width:200px;font-weight:600;font-size:13px;color:#555;">
                             <?php echo esc_html( $field['label'] ?? ucwords( str_replace( '_', ' ', $key ) ) ); ?>
@@ -69,13 +115,13 @@
                         <td style="font-size:14px;">
                             <span class="iqw-entry-display-val">
                             <?php
-                            if ( $field['type'] === 'file_upload' && filter_var( $value, FILTER_VALIDATE_URL ) ) {
+                            if ( $ftype === 'file_upload' && filter_var( $value, FILTER_VALIDATE_URL ) ) {
                                 echo '<a href="' . esc_url( $value ) . '" target="_blank">📎 View File</a>';
-                            } elseif ( $field['type'] === 'signature' && strpos( $value, 'data:image' ) === 0 ) {
+                            } elseif ( $ftype === 'signature' && strpos( $value, 'data:image' ) === 0 ) {
                                 echo '<img src="' . esc_attr( $value ) . '" alt="Signature" style="max-width:300px;border:1px solid #ddd;border-radius:4px;">';
-                            } elseif ( $field['type'] === 'email' ) {
+                            } elseif ( $ftype === 'email' ) {
                                 echo '<a href="mailto:' . esc_attr( $value ) . '">' . esc_html( $value ) . '</a>';
-                            } elseif ( $field['type'] === 'phone' ) {
+                            } elseif ( $ftype === 'phone' ) {
                                 echo '<a href="tel:' . esc_attr( $value ) . '">' . esc_html( $value ) . '</a>';
                             } else {
                                 echo esc_html( $display_value );

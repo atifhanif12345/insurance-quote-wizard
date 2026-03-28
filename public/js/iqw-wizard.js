@@ -651,12 +651,18 @@
             return html;
         }
 
+        _labelHtml(field) {
+            if (field.hide_label) return '';
+            const req = field.required ? '<span class="iqw-required">*</span>' : '';
+            return '<label class="iqw-field-label">' + this.esc(field.label) + req + '</label>';
+        }
+
         renderInput(field) {
             const req = field.required ? '<span class="iqw-required">*</span>' : '';
             const type = field.type === 'email' ? 'email' : (field.type === 'number' ? 'number' : 'text');
             const val = this.formData[field.key] || '';
 
-            return '<label class="iqw-field-label">' + this.esc(field.label) + req + '</label>' +
+            return this._labelHtml(field) +
                 '<input type="' + type + '" class="iqw-input" name="' + this.esc(field.key) + '" ' +
                 'placeholder="' + this.esc(field.placeholder || '') + '" value="' + this.esc(val) + '" ' +
                 (field.min !== undefined ? 'min="' + field.min + '" ' : '') +
@@ -667,7 +673,7 @@
         renderPhone(field) {
             const req = field.required ? '<span class="iqw-required">*</span>' : '';
             const val = this.formData[field.key] || '';
-            return '<label class="iqw-field-label">' + this.esc(field.label) + req + '</label>' +
+            return this._labelHtml(field) +
                 '<input type="tel" class="iqw-input iqw-phone-input" name="' + this.esc(field.key) + '" ' +
                 'placeholder="' + this.esc(field.placeholder || '(555) 123-4567') + '" value="' + this.esc(val) + '" ' +
                 'maxlength="14" autocomplete="tel" data-type="phone">';
@@ -676,7 +682,7 @@
         renderCurrency(field) {
             const req = field.required ? '<span class="iqw-required">*</span>' : '';
             const val = this.formData[field.key] || '';
-            return '<label class="iqw-field-label">' + this.esc(field.label) + req + '</label>' +
+            return this._labelHtml(field) +
                 '<div class="iqw-currency-wrap">' +
                 '<span class="iqw-currency-prefix">$</span>' +
                 '<input type="text" inputmode="numeric" class="iqw-input iqw-currency-input" name="' + this.esc(field.key) + '" ' +
@@ -715,7 +721,7 @@
             let yearOpts = '<option value="">Year</option>';
             for(let y=startYear; y>=endYear; y--) { yearOpts += '<option value="'+y+'"'+(selYear==y?' selected':'')+'>'+y+'</option>'; }
 
-            return '<label class="iqw-field-label">' + this.esc(field.label) + req + '</label>' +
+            return this._labelHtml(field) +
                 '<div class="iqw-date-selects" data-field-key="' + this.esc(field.key) + '">' +
                 '<select class="iqw-select iqw-date-month" data-part="month">' + monthOpts + '</select>' +
                 '<select class="iqw-select iqw-date-day" data-part="day">' + dayOpts + '</select>' +
@@ -728,7 +734,7 @@
             const req = field.required ? '<span class="iqw-required">*</span>' : '';
             const val = this.formData[field.key] || '';
 
-            let html = '<label class="iqw-field-label">' + this.esc(field.label) + req + '</label>';
+            let html = this._labelHtml(field);
             html += '<select class="iqw-select" name="' + this.esc(field.key) + '" data-type="select">';
             html += '<option value="">Select...</option>';
             (field.options || []).forEach(opt => {
@@ -742,7 +748,7 @@
             const req = field.required ? '<span class="iqw-required">*</span>' : '';
             const val = this.formData[field.key] || '';
 
-            return '<label class="iqw-field-label">' + this.esc(field.label) + req + '</label>' +
+            return this._labelHtml(field) +
                 '<textarea class="iqw-input iqw-textarea" name="' + this.esc(field.key) + '" ' +
                 'placeholder="' + this.esc(field.placeholder || '') + '" ' +
                 'rows="4" data-type="textarea">' + this.esc(val) + '</textarea>';
@@ -752,7 +758,7 @@
             const req = field.required ? '<span class="iqw-required">*</span>' : '';
             const accept = field.accept || '.pdf,.jpg,.jpeg,.png,.doc,.docx';
             const maxSize = field.max_size || 10;
-            return '<label class="iqw-field-label">' + this.esc(field.label) + req + '</label>' +
+            return this._labelHtml(field) +
                 '<div class="iqw-file-upload-wrap">' +
                 '<input type="file" class="iqw-file-input" name="fields_' + this.esc(field.key) + '" ' +
                 'accept="' + this.esc(accept) + '" data-max-size="' + maxSize + '" data-type="file_upload" data-field-key="' + this.esc(field.key) + '">' +
@@ -768,7 +774,7 @@
         renderUrl(field) {
             const req = field.required ? '<span class="iqw-required">*</span>' : '';
             const val = this.formData[field.key] || '';
-            return '<label class="iqw-field-label">' + this.esc(field.label) + req + '</label>' +
+            return this._labelHtml(field) +
                 '<input type="url" class="iqw-input" name="' + this.esc(field.key) + '" ' +
                 'placeholder="' + this.esc(field.placeholder || 'https://') + '" value="' + this.esc(val) + '" ' +
                 'data-type="url">';
@@ -791,7 +797,7 @@
             const placeholders = { street: '123 Main St', city: 'City', state: 'State', zip: '12345' };
             const widths = { street: '100%', city: '40%', state: '30%', zip: '25%' };
 
-            let html = '<label class="iqw-field-label">' + this.esc(field.label) + req + '</label>';
+            let html = this._labelHtml(field);
             html += '<div class="iqw-address-group">';
 
             // Street with autocomplete
@@ -829,7 +835,7 @@
             const amount = field.amount || '';
             const amountLabel = amount ? '$' + parseFloat(amount).toFixed(2) : 'Variable';
 
-            let html = '<label class="iqw-field-label">' + this.esc(field.label || 'Payment') + req + '</label>';
+            let html = this._labelHtml(field);
             html += '<div class="iqw-payment-wrap" data-field-key="' + this.esc(field.key) + '">';
 
             if (!amount) {
@@ -857,7 +863,7 @@
             const decimals = field.decimal_places ?? 2;
             const val = this.formData[field.key] || '0';
 
-            let html = '<label class="iqw-field-label">' + this.esc(field.label) + '</label>';
+            let html = this._labelHtml(field);
             html += '<div class="iqw-calculated-field" data-field-key="' + this.esc(field.key) + '" ' +
                 'data-formula="' + this.esc(field.formula || '') + '" ' +
                 'data-decimals="' + decimals + '" ' +
@@ -913,7 +919,7 @@
             const h = field.canvas_height || 150;
             const color = field.pen_color || '#000000';
 
-            let html = '<label class="iqw-field-label">' + this.esc(field.label) + req + '</label>';
+            let html = this._labelHtml(field);
             html += '<div class="iqw-signature-wrap" data-field-key="' + this.esc(field.key) + '">';
             html += '<canvas class="iqw-signature-canvas" width="' + w + '" height="' + h + '" data-pen-color="' + this.esc(color) + '" style="border:2px solid #ddd;border-radius:8px;cursor:crosshair;touch-action:none;max-width:100%;"></canvas>';
             html += '<div class="iqw-signature-actions">';
@@ -1020,7 +1026,7 @@
             const items = this.formData['__repeater_' + field.key + '_count'] || 1;
             const count = Math.max(1, parseInt(items));
 
-            let html = '<label class="iqw-field-label">' + this.esc(field.label) + req + '</label>';
+            let html = this._labelHtml(field);
             html += '<div class="iqw-repeater" data-field-key="' + this.esc(field.key) + '" data-max="' + maxItems + '">';
 
             for (let i = 0; i < count; i++) {
@@ -1086,7 +1092,7 @@
 
             if (field.label && !hideLabel) {
                 const req = field.required ? '<span class="iqw-required">*</span>' : '';
-                html += '<label class="iqw-field-label">' + this.esc(field.label) + req + '</label>';
+                html += this._labelHtml(field);
             }
 
             html += '<div class="iqw-radio-cards' + (useGrid ? ' grid' : '') + '" data-auto-advance="' + (optCount <= 4 ? '1' : '0') + '">';
@@ -1105,7 +1111,7 @@
         renderCheckboxGroup(field) {
             const req = field.required ? '<span class="iqw-required">*</span>' : '';
             const vals = this.formData[field.key] || [];
-            let html = '<label class="iqw-field-label">' + this.esc(field.label) + req + '</label>';
+            let html = this._labelHtml(field);
             html += '<div class="iqw-checkbox-group">';
             (field.options || []).forEach(opt => {
                 const checked = Array.isArray(vals) && vals.includes(opt.value);
