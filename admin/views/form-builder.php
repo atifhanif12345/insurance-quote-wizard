@@ -209,6 +209,9 @@ $form_id_val = $form ? $form->id : 0;
                         </select>
                         <p class="description"><?php _e( 'Wizard = step-by-step with progress bar. Single = all fields on one page.', 'iqw' ); ?></p>
                     </td></tr>
+                    <tr><th><?php _e( 'Save &amp; Finish Later', 'iqw' ); ?></th>
+                    <td><label><input type="checkbox" id="iqw-setting-save-later" <?php checked( $form_config['settings']['enable_save_later'] ?? true ); ?>> <?php _e( 'Show "Save &amp; Finish Later" button', 'iqw' ); ?></label>
+                    <p class="description"><?php _e( 'Allows users to save progress and resume via a unique link (like Gravity Forms Save &amp; Continue).', 'iqw' ); ?></p></td></tr>
                     <tr><th><?php _e( 'Review Step', 'iqw' ); ?></th>
                     <td><label><input type="checkbox" id="iqw-setting-review-step" <?php checked( ! empty( $form_config['settings']['review_step'] ) ); ?>> <?php _e( 'Show review/summary step before submit', 'iqw' ); ?></label>
                     <p class="description"><?php _e( 'Adds a final step where users can review and edit their answers before submitting.', 'iqw' ); ?></p></td></tr>

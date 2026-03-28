@@ -33,14 +33,20 @@
             this.applyUrlParams();
             this._applyPreset();
 
-            // Popup mode: always start fresh — never resume from page URL
             const isPopup = this.options.isPopup || this.container.dataset.iqwPopup === 'true';
+
+            // Popup opened via resume link — load draft using token passed in options
+            if (isPopup && this.options.resumeToken) {
+                this.loadDraftFromUrl(this.options.resumeToken);
+                this.applyCustomColor();
+                return;
+            }
+
+            // Inline form — resume from ?iqw_resume= URL param
             if (!isPopup) {
-                // If resuming a draft, load it first then render
                 const params = new URLSearchParams(window.location.search);
                 if (params.get('iqw_resume')) {
                     this.loadDraftFromUrl();
-                    // loadDraftFromUrl handles rendering after fetch completes
                     this.applyCustomColor();
                     return;
                 }
@@ -63,7 +69,7 @@
                 this.renderProgressBar();
                 this.bindNavigation();
                 this.bindKeyboard();
-                const startStep = this._resumeToStep && this.visibleSteps.includes(this._resumeToStep) ? this._resumeToStep : (this.visibleSteps[0] || 0);
+                const startStep = (this._resumeToStep != null && this.visibleSteps.includes(this._resumeToStep)) ? this._resumeToStep : (this.visibleSteps[0] || 0);
                 this.showStep(startStep);
             }
 
@@ -405,10 +411,10 @@
             return html;
         }
 
-        // Load draft if ?iqw_resume=TOKEN in URL
-        loadDraftFromUrl() {
+        // Load draft — token can be passed directly (popup) or read from URL (inline)
+        loadDraftFromUrl(tokenOverride) {
             const params = new URLSearchParams(window.location.search);
-            const token = params.get('iqw_resume');
+            const token = tokenOverride || params.get('iqw_resume');
             if (!token) { this._initRender(); return; }
 
             // Show loading state
@@ -460,6 +466,7 @@
                 fd.append('iqw_nonce', this.config.nonce);
                 fd.append('current_step', this.currentStep);
                 fd.append('draft_token', this.draftToken);
+                fd.append('page_url', window.location.href);
 
                 Object.keys(this.formData).forEach(key => {
                     const val = this.formData[key];
@@ -653,12 +660,10 @@
 
         _labelHtml(field) {
             if (field.hide_label) return '';
-            const req = field.required ? '<span class="iqw-required">*</span>' : '';
             return '<label class="iqw-field-label">' + this.esc(field.label) + req + '</label>';
         }
 
         renderInput(field) {
-            const req = field.required ? '<span class="iqw-required">*</span>' : '';
             const type = field.type === 'email' ? 'email' : (field.type === 'number' ? 'number' : 'text');
             const val = this.formData[field.key] || '';
 
@@ -671,7 +676,6 @@
         }
 
         renderPhone(field) {
-            const req = field.required ? '<span class="iqw-required">*</span>' : '';
             const val = this.formData[field.key] || '';
             return this._labelHtml(field) +
                 '<input type="tel" class="iqw-input iqw-phone-input" name="' + this.esc(field.key) + '" ' +
@@ -680,7 +684,6 @@
         }
 
         renderCurrency(field) {
-            const req = field.required ? '<span class="iqw-required">*</span>' : '';
             const val = this.formData[field.key] || '';
             return this._labelHtml(field) +
                 '<div class="iqw-currency-wrap">' +
@@ -691,7 +694,6 @@
         }
 
         renderDate(field) {
-            const req = field.required ? '<span class="iqw-required">*</span>' : '';
             const val = this.formData[field.key] || '';
             
             // Parse existing value
@@ -731,7 +733,6 @@
         }
 
         renderSelect(field) {
-            const req = field.required ? '<span class="iqw-required">*</span>' : '';
             const val = this.formData[field.key] || '';
 
             let html = this._labelHtml(field);
@@ -745,7 +746,6 @@
         }
 
         renderTextarea(field) {
-            const req = field.required ? '<span class="iqw-required">*</span>' : '';
             const val = this.formData[field.key] || '';
 
             return this._labelHtml(field) +
@@ -755,7 +755,6 @@
         }
 
         renderFileUpload(field) {
-            const req = field.required ? '<span class="iqw-required">*</span>' : '';
             const accept = field.accept || '.pdf,.jpg,.jpeg,.png,.doc,.docx';
             const maxSize = field.max_size || 10;
             return this._labelHtml(field) +
@@ -772,7 +771,6 @@
         }
 
         renderUrl(field) {
-            const req = field.required ? '<span class="iqw-required">*</span>' : '';
             const val = this.formData[field.key] || '';
             return this._labelHtml(field) +
                 '<input type="url" class="iqw-input" name="' + this.esc(field.key) + '" ' +
@@ -791,11 +789,8 @@
         }
 
         renderAddress(field) {
-            const req = field.required ? '<span class="iqw-required">*</span>' : '';
-            const subFields = field.sub_fields || ['street', 'city', 'state', 'zip'];
             const labels = { street: 'Street Address', city: 'City', state: 'State', zip: 'ZIP Code' };
             const placeholders = { street: '123 Main St', city: 'City', state: 'State', zip: '12345' };
-            const widths = { street: '100%', city: '40%', state: '30%', zip: '25%' };
 
             let html = this._labelHtml(field);
             html += '<div class="iqw-address-group">';
@@ -831,9 +826,7 @@
         }
 
         renderPayment(field) {
-            const req = field.required ? '<span class="iqw-required">*</span>' : '';
             const amount = field.amount || '';
-            const amountLabel = amount ? '$' + parseFloat(amount).toFixed(2) : 'Variable';
 
             let html = this._labelHtml(field);
             html += '<div class="iqw-payment-wrap" data-field-key="' + this.esc(field.key) + '">';
@@ -914,7 +907,6 @@
         }
 
         renderSignature(field) {
-            const req = field.required ? '<span class="iqw-required">*</span>' : '';
             const w = field.canvas_width || 400;
             const h = field.canvas_height || 150;
             const color = field.pen_color || '#000000';
@@ -976,7 +968,7 @@
                     ctx.stroke();
                 };
 
-                const endDraw = (e) => {
+                const endDraw = (_e) => {
                     if (!drawing) return;
                     drawing = false;
                     ctx.closePath();
@@ -1019,7 +1011,6 @@
         }
 
         renderRepeater(field) {
-            const req = field.required ? '<span class="iqw-required">*</span>' : '';
             const subFields = field.sub_fields || [];
             const maxItems = field.max_items || 5;
             const btnLabel = field.add_button_label || 'Add Another';
@@ -1091,7 +1082,6 @@
             const hideLabel = isSingleFieldStep && optCount <= 2;
 
             if (field.label && !hideLabel) {
-                const req = field.required ? '<span class="iqw-required">*</span>' : '';
                 html += this._labelHtml(field);
             }
 
@@ -1109,7 +1099,6 @@
         }
 
         renderCheckboxGroup(field) {
-            const req = field.required ? '<span class="iqw-required">*</span>' : '';
             const vals = this.formData[field.key] || [];
             let html = this._labelHtml(field);
             html += '<div class="iqw-checkbox-group">';

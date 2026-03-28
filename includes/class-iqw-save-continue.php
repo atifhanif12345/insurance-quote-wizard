@@ -19,10 +19,11 @@ class IQW_Save_Continue {
             wp_send_json_error( 'Security check failed.', 403 );
         }
 
-        $form_id = absint( $_POST['form_id'] ?? 0 );
-        $fields  = $_POST['fields'] ?? array();
-        $step    = absint( $_POST['current_step'] ?? 0 );
-        $token   = sanitize_text_field( $_POST['draft_token'] ?? '' );
+        $form_id  = absint( $_POST['form_id'] ?? 0 );
+        $fields   = $_POST['fields'] ?? array();
+        $step     = absint( $_POST['current_step'] ?? 0 );
+        $token    = sanitize_text_field( $_POST['draft_token'] ?? '' );
+        $page_url = esc_url_raw( $_POST['page_url'] ?? '' );
 
         if ( ! $form_id || empty( $fields ) ) {
             wp_send_json_error( 'Missing data.' );
@@ -57,7 +58,7 @@ class IQW_Save_Continue {
 
                 wp_send_json_success( array(
                     'token'      => $token,
-                    'resume_url' => self::get_resume_url( $token ),
+                    'resume_url' => self::get_resume_url( $token, $form_id, $page_url ),
                     'message'    => __( 'Progress saved! You can resume anytime.', 'iqw' ),
                 ) );
                 return;
@@ -86,7 +87,7 @@ class IQW_Save_Continue {
 
         wp_send_json_success( array(
             'token'      => $token,
-            'resume_url' => self::get_resume_url( $token ),
+            'resume_url' => self::get_resume_url( $token, $form_id, $page_url ),
             'message'    => __( 'Progress saved! You can resume anytime.', 'iqw' ),
         ) );
     }
@@ -120,16 +121,22 @@ class IQW_Save_Continue {
 
     /**
      * Get resume URL
+     * Includes form_id so popup forms can auto-open on the correct popup.
      */
-    public static function get_resume_url( $token ) {
-        // Use current page URL if available, fallback to homepage
-        $page_url = wp_get_referer();
+    public static function get_resume_url( $token, $form_id = 0, $page_url = '' ) {
+        // Prefer the page_url sent by the frontend (most reliable)
         if ( ! $page_url ) {
-            $page_url = home_url( $_SERVER['REQUEST_URI'] ?? '/' );
+            $page_url = wp_get_referer();
         }
-        // Strip existing iqw_resume param if present
-        $page_url = remove_query_arg( 'iqw_resume', $page_url );
-        return add_query_arg( 'iqw_resume', $token, $page_url );
+        if ( ! $page_url ) {
+            $page_url = home_url( '/' );
+        }
+        // Strip any existing resume params
+        $page_url = remove_query_arg( array( 'iqw_resume', 'iqw_form' ), $page_url );
+        return add_query_arg( array(
+            'iqw_resume' => $token,
+            'iqw_form'   => $form_id ? absint( $form_id ) : 0,
+        ), $page_url );
     }
 
     /**

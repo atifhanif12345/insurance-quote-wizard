@@ -77,7 +77,8 @@ class IQW_Shortcode {
             }
 
             // Build data-* attributes for the trigger button
-            $data_attrs = ' data-iqw-popup="' . esc_attr( $uid ) . '"';
+            $data_attrs  = ' data-iqw-popup="' . esc_attr( $uid ) . '"';
+            $data_attrs .= ' data-iqw-form-id="' . esc_attr( $form_id ) . '"';
             if ( $preset_json )                  $data_attrs .= ' data-iqw-preset="' . esc_attr( $preset_json ) . '"';
             if ( $atts['popup_width'] )          $data_attrs .= ' data-iqw-width="' . esc_attr( $atts['popup_width'] ) . '"';
             if ( $atts['popup_overlay'] )        $data_attrs .= ' data-iqw-overlay="' . esc_attr( $atts['popup_overlay'] ) . '"';
@@ -164,10 +165,32 @@ class IQW_Shortcode {
         // Init wizard (after paint so DOM is ready)
         setTimeout(function(){
             if(window.IQWWizard && wizContainer){
-                new window.IQWWizard(wizContainer.id, wizContainer.dataset.formId, {isPopup: true});
+                // If this popup was auto-opened for a draft resume, pass the token
+                var _urlParams = new URLSearchParams(window.location.search);
+                var _resumeToken = _urlParams.get("iqw_resume") || "";
+                var _resumeForm  = parseInt(_urlParams.get("iqw_form") || "0");
+                var _thisFormId  = parseInt(wizContainer.dataset.formId || "0");
+                var _opts = {isPopup: true};
+                if(_resumeToken && _resumeForm && _resumeForm === _thisFormId){
+                    _opts.resumeToken = _resumeToken;
+                }
+                new window.IQWWizard(wizContainer.id, wizContainer.dataset.formId, _opts);
             }
         }, 50);
     });
+
+    // Auto-open this popup if ?iqw_resume=TOKEN&iqw_form=FORM_ID matches this popup's form
+    (function(){
+        var params = new URLSearchParams(window.location.search);
+        var resumeToken = params.get("iqw_resume");
+        var resumeForm  = parseInt(params.get("iqw_form") || "0");
+        if(!resumeToken || !resumeForm) return;
+        // Find trigger button for this form
+        var triggers = document.querySelectorAll("[data-iqw-form-id=\""+resumeForm+"\"][data-iqw-popup]");
+        if(!triggers.length) return;
+        // Slight delay to let page finish rendering
+        setTimeout(function(){ triggers[0].click(); }, 300);
+    })();
 })();
 </script>';
 

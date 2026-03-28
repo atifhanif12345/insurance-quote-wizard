@@ -270,9 +270,12 @@ class IQW_Public {
                     ← <?php _e( 'Back', 'iqw' ); ?>
                 </a>
                 <div class="iqw-nav-right">
+                    <?php $enable_save = $settings['enable_save_later'] ?? true; ?>
+                    <?php if ( $enable_save ) : ?>
                     <a href="#" class="iqw-save-later" id="iqw-save-later-<?php echo esc_attr( $form->id ); ?>" title="<?php _e( 'Save progress and finish later', 'iqw' ); ?>">
                         💾 <?php _e( 'Save & Finish Later', 'iqw' ); ?>
                     </a>
+                    <?php endif; ?>
                     <button type="button" class="iqw-btn-next" id="iqw-next-<?php echo esc_attr( $form->id ); ?>">
                         <?php _e( 'Next', 'iqw' ); ?>
                     </button>

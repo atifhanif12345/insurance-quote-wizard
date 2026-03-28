@@ -234,6 +234,7 @@
         config.settings = config.settings || {};
         config.settings.theme = $('#iqw-setting-theme').val() || 'default';
         config.settings.form_mode = $('#iqw-setting-form-mode').val() || 'wizard';
+        config.settings.enable_save_later = $('#iqw-setting-save-later').is(':checked');
         config.settings.review_step = $('#iqw-setting-review-step').is(':checked');
         config.settings.motivation_text = $('#iqw-setting-motivation').val();
         config.settings.success_message = $('#iqw-setting-success').val();
