@@ -14,6 +14,7 @@ class IQW_Activator {
     public static function activate() {
         self::create_tables();
         self::install_default_forms();
+        require_once IQW_PLUGIN_DIR . 'includes/class-iqw-abandonment.php';
         IQW_Abandonment::create_table();
         self::set_default_options();
 
